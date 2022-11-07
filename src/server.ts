@@ -1,7 +1,10 @@
 const { readFileSync } = require("fs");
 const { createServer } = require("https");
 const brightness = require('brightness');
+import {config} from "dotenv";
 import {Server} from 'socket.io'
+
+const dot = config({ path: __dirname + "../.env" });
 
 const httpServer = createServer({
   key: readFileSync('../crt/certificado.key'),
@@ -15,12 +18,9 @@ const io = new Server(httpServer, {cors: {origin: '*'}});
 io.on("connection", (socket) => {
     console.log('conexão')
     socket.on('data', (args : {XRotation: number, YRotation: number, ZRotation: number}) => {
-        console.log(args)
-        brightness.set(Math.abs(args.ZRotation / 360))
-        console.log('val'+ Math.abs(args.ZRotation))  
     })
   });
 
-httpServer.listen(3000, ()=>{
+httpServer.listen(process.env.PORT, ()=>{
   console.log('Servidor aberto')
 });

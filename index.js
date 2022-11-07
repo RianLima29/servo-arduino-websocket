@@ -1,4 +1,4 @@
-const socket = io("https://192.168.172.207:3000");
+const socket = io("https://arduino-web-socket.onrender.com");
 
 const throttle = (func, limit) => {
   let lastFunc
@@ -20,6 +20,13 @@ const throttle = (func, limit) => {
     }
   }
 }
+socket.on('data',(data)=>{
+  console.log(data)
+  alert()
+})
+socket.on("connect", () => {
+  console.log("Connected to server");
+})
 
 const readData = (event) => {
 
