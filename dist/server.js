@@ -14,6 +14,11 @@ var io = new socket_io_1.Server(httpServer, { cors: { origin: '*' } });
 io.on("connection", function (socket) {
     console.log('conexão');
     socket.on('data', function (args) {
+        socket.emit('data',args)
+        console.log(args);
+        brightness.set(Math.abs(args.ZRotation / 360));
+        console.log('val' + Math.abs(args.ZRotation));
+
     });
 });
 httpServer.listen(process.env.PORT, function () {
