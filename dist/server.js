@@ -17,6 +17,6 @@ io.on("connection", function (socket) {
         console.log('val' + Math.abs(args.ZRotation));
     });
 });
-httpServer.listen(80, function () {
+httpServer.listen(3000, function () {
     console.log('Servidor aberto');
 });
