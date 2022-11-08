@@ -1,10 +1,11 @@
 const { readFileSync } = require("fs");
 const { createServer } = require("https");
 const brightness = require('brightness');
-import {config} from "dotenv";
+import path from 'path'
+import * as dotenv from "dotenv";
 import {Server} from 'socket.io'
 
-const dot = config({ path: __dirname + "../.env" });
+dotenv.config({ path: path.join(__dirname, '../.env')});
 
 const httpServer = createServer({
   key: readFileSync('../crt/certificado.key'),
@@ -22,5 +23,5 @@ io.on("connection", (socket) => {
   });
 
 httpServer.listen(process.env.PORT, ()=>{
-  console.log('Servidor aberto')
+  console.log('Servidor aberto, '+process.env.PORT)
 });

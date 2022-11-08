@@ -22,5 +22,5 @@ io.on("connection", function (socket) {
     });
 });
 httpServer.listen(process.env.PORT, function () {
-    console.log('Servidor aberto');
+    console.log('Servidor aberto, porta ' + process.env.PORT)
 });
